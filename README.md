@@ -1,7 +1,7 @@
 # README #
 
 This repo provides all code and data to reproduce the results and figures from:  
-Lyons et al. (in review) "Model-based assessment of ecological community classifications".  
+Lyons et al. (2016) "Model-based assessment of ecological community classifications". Journal of Vegetation Science: In Press
 
 Vegetation data originally from:  
 http://www.bionet.nsw.gov.au/  
