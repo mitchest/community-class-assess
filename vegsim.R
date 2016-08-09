@@ -7,10 +7,10 @@
 # stddev = 0.01 --> standard deviation for species optimums
 # width = 0.25 --> width of the species response curves (tolerence on gradient)
 # uniformWidth = T --> if true, species gradient tolerences will be uniform, if false they will vary around "width" (more realistic?)
-# customMultiplier = NULL --> if not NULL, then a vector of length 2 to use for from= and to= in sep()
+# customMultiplier = NULL --> if not NULL, then a vector of length 2 to use for from= and to= in seq()
 # randomSample = F --> whether to sample close to species optima or randomly across gradients
 # plotSim = FALSE --> plot species/community distribution, specified by plotsToPrint=
-# plotsToPrint = NULL --> which species numbers to plot response/sample plots for
+# plotsToPrint = 1:9 --> which species numbers to plot response/sample plots for
 # plotOpt = TRUE --> plot sample optima
 VegSim = function(C=9, S=3, Nmult=10, width=0.25, uniformWidth=T, customMultiplier=NULL, 
                   randomSample=F, plotSim=T, plotsToPrint=1:9, plotOpt=T) {
