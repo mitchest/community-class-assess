@@ -1,7 +1,3 @@
-# library(coenocliner)
-# library(class)
-
-
 # bivariate community gradient --------------------------------------------
 
 ## function to simulate veg communities, where:
@@ -11,12 +7,13 @@
 # stddev = 0.01 --> standard deviation for species optimums
 # width = 0.25 --> width of the species response curves (tolerence on gradient)
 # uniformWidth = T --> if true, species gradient tolerences will be uniform, if false they will vary around "width" (more realistic?)
-# customMultiplier = F --> if true
+# customMultiplier = NULL --> if not NULL, then a vector of length 2 to use for from= and to= in sep()
 # randomSample = F --> whether to sample close to species optima or randomly across gradients
-# plotSim = FALSE --> plot species/community distribution
+# plotSim = FALSE --> plot species/community distribution, specified by plotsToPrint=
 # plotsToPrint = NULL --> which species numbers to plot response/sample plots for
 # plotOpt = TRUE --> plot sample optima
-VegSim = function(C=9, S=3, Nmult=10, width=0.25, uniformWidth=T, customMultiplier=NULL, randomSample=F, plotSim=F, plotsToPrint=NULL, plotOpt=T) {
+VegSim = function(C=9, S=3, Nmult=10, width=0.25, uniformWidth=T, customMultiplier=NULL, 
+                  randomSample=F, plotSim=F, plotsToPrint=1:3, plotOpt=T) {
   require(coenocliner)
   require(class)
   # check if parameterised correctly
@@ -69,8 +66,8 @@ VegSim = function(C=9, S=3, Nmult=10, width=0.25, uniformWidth=T, customMultipli
     # gaussian responses
     grad = expand.grid(x=gradx, y=grady) # put gradient locations together for a large perfect Gaussian model
     responses = coenocline(grad, responseModel = "gaussian",
-                       params = params, extraParams = list(corr = 0.5),
-                       expectation = TRUE)
+                           params = params, extraParams = list(corr = 0.5),
+                           expectation = TRUE)
     # plot them
     par(mar=c(1,0.5,1,0.5))
     for (i in plotsToPrint) {
@@ -81,8 +78,8 @@ VegSim = function(C=9, S=3, Nmult=10, width=0.25, uniformWidth=T, customMultipli
     
     # simulate from gaussian respnse with negbin error
     simulated = coenocline(grad, responseModel = "gaussian",
-                        params = params, extraParams = list(corr = 0.5),
-                        countModel = "negbin", countParams = list(alpha = 1))
+                           params = params, extraParams = list(corr = 0.5),
+                           countModel = "negbin", countParams = list(alpha = 1))
     # plot them
     par(mar=c(1,0.5,1,0.5))
     for (i in plotsToPrint) {
@@ -109,15 +106,15 @@ VegSim = function(C=9, S=3, Nmult=10, width=0.25, uniformWidth=T, customMultipli
     class = factor(1:C)
     clusters = knn(train=centres, test=sample.opt, cl=class, k=1)
   }
-    
+  
   if (plotOpt == T) {
     plot(x=sample.optx, y=sample.opty, col=clusters, pch=16, xlab="covariate 1", ylab="covariate 2")
     points(x=optx, y=opty, pch=1)
   }
   
   sampled = coenocline(sample.opt, responseModel = "gaussian",
-                         params = params, extraParams = list(corr = 0.5),
-                         countModel = "negbin", countParams = list(alpha = 1))
+                       params = params, extraParams = list(corr = 0.5),
+                       countModel = "negbin", countParams = list(alpha = 1))
   
   sampled = cbind(clusters, sampled)
   # remove rows with no species
