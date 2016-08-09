@@ -13,7 +13,7 @@
 # plotsToPrint = NULL --> which species numbers to plot response/sample plots for
 # plotOpt = TRUE --> plot sample optima
 VegSim = function(C=9, S=3, Nmult=10, width=0.25, uniformWidth=T, customMultiplier=NULL, 
-                  randomSample=F, plotSim=F, plotsToPrint=1:3, plotOpt=T) {
+                  randomSample=F, plotSim=T, plotsToPrint=1:9, plotOpt=T) {
   require(coenocliner)
   require(class)
   # check if parameterised correctly
