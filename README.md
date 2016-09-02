@@ -1,3 +1,7 @@
+## NOTE: I have re-implemented most of the functionality here as an R package called 'optimus': ##
+## https://github.com/mitchest/optimus ##
+  
+  
 # README #
 
 This repo provides all code and data to reproduce the results and figures from:  
